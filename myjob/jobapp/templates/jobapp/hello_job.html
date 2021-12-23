@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+{% load bootstrap4 %}
+{% block content %}
+
+    <div style="border-radius: 1rem; margin: 2rem; text-align : center">
+        <h1 style="font-family: 'Abril Fatface', cursive;">
+            Find your Job!
+        </h1>
+        </br>
+        <form action="/job/hello_job/" method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <div>
+                <input type="text" name="hello_job_input"></br>
+            </div>
+            </br>
+            <div>
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary">Find</button>
+                {% endbuttons %}
+            </div>
+
+        </form>
+        {% if hello_job_list %}
+            {%for hello_job in hello_job_list %}
+            <h4>
+                {{ hello_job.text}}
+            </h4>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+{% endblock %}
