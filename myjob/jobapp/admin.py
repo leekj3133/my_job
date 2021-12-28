@@ -1,8 +1,7 @@
-from django.contrib import admin
-from .models import Job
-
 from django.contrib.admin.filters import ChoicesFieldListFilter
 # Register your models here.
+from django.contrib import admin
+from .models import Jobapp
 
 class JobAdmin(admin.ModelAdmin):
     search_fields = ["title"]
@@ -13,9 +12,8 @@ class JobAdmin(admin.ModelAdmin):
     list_display = ("title", "company", "url")
     search_fields = ["question_text"]
 
-admin.site.register(Job, JobAdmin)
+admin.site.register(Jobapp, JobAdmin)
 
-# from .models import Choice, Question
 
 
 

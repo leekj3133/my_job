@@ -1,26 +1,18 @@
 <!DOCTYPE html>
 <html lang="ko">
 
+<br>
 {% include 'head.html' %}
 
 <body>
+    <div>
 
     {% include 'header.html' %}
-    <hr>
     {% block content %}
     {% endblock %}
-    <hr>
-<!--<div style="height: 20rem; background-color: #38df81; border-radius: 1rem; margin: 2rem;">-->
 
-<!--    </div>-->
+    </div>
+
     {% include 'footer.html' %}
 </body>
 </html>
-
-<!--{% for jobapp in job_list%}-->
-<!--    <ul>-->
-<!--        {{ jobapp.title }}-->
-<!--        {{ jobapp.company }}-->
-<!--        {{ jobapp.url }}-->
-<!--    </ul>-->
-<!--{% endfor %}-->

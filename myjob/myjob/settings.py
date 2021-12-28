@@ -34,7 +34,6 @@ MY_SECRET = {
     "SECRET_KEY": 'django-insecure-1kv8b9f-xj3cq#h(ggi(bd$^7rxz!4z#!51)azy+qieb6a6b)a'
 }
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = MY_SECRET['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -51,7 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'jobapp'
+    'jobapp',
+    'bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -77,7 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'bootstrap4',
+
             ],
         },
     },
@@ -89,7 +89,7 @@ WSGI_APPLICATION = 'myjob.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
+MY_DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': BASE_DIR / 'db.sqlite3',
@@ -149,3 +149,5 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+SECRET_KEY = MY_SECRET['SECRET_KEY']
+DATABASES = MY_DATABASES
