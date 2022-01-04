@@ -1,68 +1,47 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect,FileResponse,StreamingHttpResponse
 from django.shortcuts import render,redirect
-
+from crawling_job import crwler_job,DBtoCSV
 from django.urls import reverse
-
-from jobapp.models import Jobapp
+from django.db.models import Q
+from jobapp.models import GetInfo
+import os
 
 def hello_job(request):
-
-    if request.method == "POST":
-
-        temp = request.POST.get("JOB INPUT")
-
-        new_hello_job = Jobapp()
-        new_hello_job.text = request.POST["text"]
-        new_hello_job.save()
-        return redirect("hello_job")
-        # hello_job_list = Job.objects.all()
-        # return HttpResponseRedirect(reverse('jopapp:hello_job'))
-    else:
-        hello_job_list = Jobapp.objects.all()
-        return render(request,'jobapp/hello_job.html', {"job_list" : hello_job_list})
+    job_list = GetInfo.objects.order_by("title")
+    context={"job_list": job_list}
+    return render(request,"jobapp/hello_job.html",context)
 
 def result(request):
-    if request.method == "GET":
-        results = Jobapp.objects.all()
-        data = {
-            "result": results,
-        }
-        return render(request, "jobapp/job_list.html", data)
-    elif request.method == "POST":
-        results = Jobapp.objects.all()
-        data = {
-            "result": results,
-        }
-        return render(request, "jobapp/job_list.html", data)
-    # db = {}
-    # word = request.args.get("word")
-    # if word:
-    #     word = word.lower()
-    #     existingJobs = db.get(word)
-    #     searchingBy = word,
-    #     resultNumber = len(jobs),
-    #     jobs = jobs
-    #     data = {
-    #         "searchingBy" : searchingBy,
-    #         "resultNumber" : resultNumber,
-    #         "jobs" : jobs
-    #     }
-    #     if existingJobs:
-    #         jobs = existingJobs
-    #     else:
-    #         so_jobs = get_so_jobs(word)
-    #         wwr_jobs = get_wwr_jobs(word)
-    #         remote_jobs = get_remote_jobs(word)
-    #         jobs = so_jobs + wwr_jobs + remote_jobs
-    #         db[word] = jobs
-    # else:
-    #     return redirect("/")
-    # return render(request,
-    #     "report.html",
-    #     data)
+    job_lists = GetInfo.objects.all()
+    search_key = request.GET.get("search_key")
+    if search_key:
 
+        job_filter_list = job_lists.filter(Q(word__icontains=search_key))
+        job_filter_list = job_filter_list.reverse()
+        DBtoCSV(search_key)
+        if job_filter_list.last() in job_lists:
+            return render(request,"jobapp/job_list.html", {"search_job_list":job_filter_list})
+        else:
+            crwler_job(search_key)
+    else:
+        raise ValueError("The Search Key is invalid")
+    return render(request,"jobapp/job_list.html", {"search_job_list":job_filter_list})
 
+def send_file(request):
+    # response = StreamingHttpResponse(content_type='text/csv')
+    # response['Content-Disposition'] = 'attachment; filename="job.csv"'
+    # rows = ("title {},company {}\n".format(row, row) for row in range(0, 100))
+    # response.streaming_content = rows
+    # return response
+    import mimetypes
+    import os, tempfile, zipfile
+    from wsgiref.util import FileWrapper
 
-
-
+    filename = "jobs.csv"  # Select your file here.
+    download_name = "job.csv"
+    chunk_size = 8192
+    response = StreamingHttpResponse(FileWrapper(open(filename,"rb"),chunk_size), content_type=mimetypes.guess_type(filename)[0])
+    response['Content-Length'] = os.path.getsize(filename)
+    response['Content-Disposition'] = "attachment; filename=%s" % download_name
+    return response
 

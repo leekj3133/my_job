@@ -1,4 +1,5 @@
 {% extends 'base.html'%}
+{% load bootstrap4 %}
 {% block content %}
         <style>
             section {
@@ -22,24 +23,31 @@
                 border-color : #eae3f033;
                 width: 30%;
                 border-width : 0.5px;
-
+                align : "center"
             }
         </style>
+
         <p><h1 align="center" >Remote Jobs</h1></p>
-        <h3 align="center" > {{resultNumber}} {{searchingBy}} jobs found. </h3>
+        {%if search_job_list %}
+        <h3 align="center" > {{search_job_list|length}} {{ search_key }} jobs found. </h3>
+        {% endif %}
         <div class="atag">
-            <a class="text1" align="center" style="text-decoration: none; font-size:14px;color: #884CBC;"href="/export?word={{searchingBy}}">Export to CSV</a>
-            <p><a class="text1" align="center" style="text-decoration: none; font-size:11px;color: #884CBC;"class="text1" href="/">← Go back </a></p>
+            <a class="text1" align="center" style="text-decoration: none; font-size:14px;color: #FF1493;"href=r"^job_list/\D+/">Export to CSV</a>
+            <p><a class="text1" align="center" style="text-decoration: none; font-size:11px;color: #FF1493;"class="text1" href="../">← Go back </a></p>
+
         </br>
         </br>
         </div>
+
         <section>
-            <table class="table tahble-striped">
-            {% for job in result %}
-                <span align="center" style="font-weight: bold;">{{job.title}}</span>
-                <span align="center">{{job.company}}</span>
-                <a href="{{job.url}}" style="text-decoration: none;" >Apply</a>
-                <hr align="center" >
-            {% endfor %}
-            </table>
+        {% for job in search_job_list %}
+<!--        <a href="/job/{{job.id}}">-->
+            <span align="center" style="font-weight: bold;">{{job.title}}</span>
+            <span align="center">{{job.company}}</span>
+            <span align="center">{{job.word}}</span>
+            <a href="{{job.url}}" style="text-decoration: none;" >Apply</a>
+            <hr style="width:30%; margin-left:35% !important; margin-right:35% !important;" />
+        </a>
+        {% endfor %}
+    </section>
 {% endblock %}

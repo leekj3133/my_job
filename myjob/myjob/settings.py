@@ -39,7 +39,11 @@ MY_SECRET = {
 DEBUG = True
 
 ALLOWED_HOSTS = []
+APPEND_SLASH=False
 
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Application definition
 
@@ -52,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'jobapp',
     'bootstrap4',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -98,7 +103,8 @@ MY_DATABASES = {
         'USER': 'root', #root
         'PASSWORD': 'Qhsksh4581!', #사용자의 비밀번호
         'HOST': '', #공백으로 냅두면 default localhost
-        'PORT': '3306' #공백으로 냅두면 default 3306'
+        'PORT': '3306', #공백으로 냅두면 default 3306'
+        "OPTIONS": {"charset": "utf8mb4"}
     }
 }
 

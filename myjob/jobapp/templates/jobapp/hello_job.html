@@ -1,19 +1,59 @@
 {% extends 'base.html'%}
 {% load bootstrap4 %}
 {% block content %}
+ <style>
+            section {
+                display:grid;
+                gap:20px;
+                /* grid-template-columns: repeat(3,1fr); */
 
+            }
+            a{
+                text-align: center;
+                font-weight: bold;
+            }
+            .atag{
+                text-align:center;
+            }
+            header{
+                background: #fff;
+                height:150px;
+            }
+            hr{
+                border-color : #eae3f033;
+                width: 30%;
+                border-width : 0.5px;
+                align : center;
+
+            }
+        </style>
 <div class="search">
-      <i class="fas fa-search"></i>
-      <input type="text" id = "title" name="title"  placeholder='      i.e python' required value="       " name="word"/>
-      <i class="fas fa-keyboard"></i>
-      <i class="fas fa-microphone"></i><br>
 
-    <form id="contents" name="contents" action="/job/job_list" method="post">
+      <i class="fas fa-search" style="left : 21rem;"></i>
+      <form id="contents" name="contents" action="job_list/" method="get">
+      <input type="text" id="search_key" name="search_key"  placeholder='      i.e python' required value="{{ search_key }}"/>
+      <i class="fas fa-keyboard"></i>
+      <i class="fas fa-microphone"></i>
+
+
     {% csrf_token %}
         <div>
-            <p><button type="submit" class="btn btn-primary" onclick="send();" value="Find">Find</button></p>
+            <button type="submit" class="btn btn-primary" onclick="send();" value="Find">Find</button>
         </div>
     </form>
+    <br/><br/>
 </div>
+
+    <section>
+        {% for job in job_list %}
+<!--        <a href="/job/{{job.id}}">-->
+            <span align="center" style="font-weight: bold;">{{job.title}}</span>
+            <span align="center">{{job.company}}</span>
+            <span align="center">{{job.word}}</span>
+            <a href="{{job.url}}" style="text-decoration: none;" >Apply</a>
+            <hr align="center"style="width:30%; margin-left:35% !important; margin-right:35% !important;" />
+        </a>
+        {% endfor %}
+    </section>
 
 {% endblock %}

@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html lang="ko">
 
+{% load static %}
+
+<style type="text/css">
+    body{
+    background-image: url("{%static 'images/cloud.jpg'%}");
+    background-repeat : no-repeat;
+    background-position : right top;
+    background-attachment:fixed;
+    }
+
+</style>
 <br>
 {% include 'head.html' %}
 
 <body>
-    <div>
-
+<div style="height: 20rem; margin: 2rem;">
     {% include 'header.html' %}
+
     {% block content %}
     {% endblock %}
 
-    </div>
+<div style="height: 20rem; border-radius: 1rem; margin: 2rem;">
 
+    </div>
+    <hr align="center" style = "color :rgba(226, 226, 226, 0.466)">
     {% include 'footer.html' %}
 </body>
 </html>
