@@ -38,7 +38,7 @@ MY_SECRET = {
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['environment name in elastic bean stalk.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['environment name in elastic bean stalk.elasticbeanstalk.com' ]
 APPEND_SLASH=False
 
 
