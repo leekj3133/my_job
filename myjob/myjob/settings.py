@@ -38,7 +38,7 @@ MY_SECRET = {
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['environment name in elastic bean stalk.elasticbeanstalk.com' ]
+ALLOWED_HOSTS = ['django-env.eba-mk2jm58z.ap-northeast-2.elasticbeanstalk.com']
 APPEND_SLASH=False
 
 
