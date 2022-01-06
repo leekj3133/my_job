@@ -3,3 +3,12 @@
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+.env
+
+venv/
+
+.idea/
+../.DS_Store
+
+.DS_Store
