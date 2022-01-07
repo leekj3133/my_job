@@ -41,7 +41,7 @@ debugpy @ file:///Users/runner/miniforge3/conda-bld/debugpy_1636043380823/work
 decorator @ file:///home/conda/feedstock_root/build_artifacts/decorator_1631346842025/work
 defusedxml @ file:///home/conda/feedstock_root/build_artifacts/defusedxml_1615232257335/work
 distlib==0.3.4
-Django==4.0
+Django==2.1.1
 entrypoints @ file:///home/conda/feedstock_root/build_artifacts/entrypoints_1605121927639/work/dist/entrypoints-0.3-py2.py3-none-any.whl
 ephem==3.7.7.1
 et-xmlfile==1.0.1
