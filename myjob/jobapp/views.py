@@ -23,9 +23,11 @@ def result(request):
             return render(request,"jobapp/job_list.html", {"search_job_list":job_filter_list})
         else:
             crwler_job(search_key)
+            DBtoCSV(search_key)
+            return render(request, "jobapp/job_list.html", {"search_job_list": job_filter_list})
     else:
         raise ValueError("The Search Key is invalid")
-    return render(request,"jobapp/job_list.html", {"search_job_list":job_filter_list})
+    # return render(request,"jobapp/job_list.html", {"search_job_list":job_filter_list})
 
 def send_file(request):
     # response = StreamingHttpResponse(content_type='text/csv')

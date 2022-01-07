@@ -34,17 +34,25 @@ def extract_remote_jobs(URL, header, word):
     result = requests.get(URL, headers=header)
     soup = BeautifulSoup(result.text, "html.parser")
     raw = soup.find("table", {"id": "jobsboard"})
+    if raw is None:
+        results = []
+        job = extract_remote_job(results, word)
+        return job
 
-    results = raw.find_all("tr", {"class": "job"})
-    job = extract_remote_job(results, word)
+    if raw is not None:
 
-    return job
+
+        results = raw.find_all("tr", {"class": "job"})
+        job = extract_remote_job(results, word)
+
+        return job
 
 
 def get_remote_jobs(word):
     URL = f"https://remoteok.io/remote-{word}-jobs"
     header = {
         'user-agent': "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"}
+
     remote_jobs = extract_remote_jobs(URL, header, word)
     return remote_jobs
 
@@ -148,6 +156,7 @@ def get_wwr_jobs(word):
 
 def getCrawler(word="python"):
     word = str(word).lower()
+
     so_jobs = get_so_jobs(word)
 
     wwr_jobs = get_wwr_jobs(word)

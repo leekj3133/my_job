@@ -42,7 +42,7 @@ ALLOWED_HOSTS = ['127.0.0.1','myjob.eba-fnfjexi3.ap-northeast-2.elasticbeanstalk
 APPEND_SLASH=False
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
 
 # Application definition
@@ -102,7 +102,7 @@ MY_DATABASES = {
         'NAME': 'JOB',  #mysql
         'USER': 'root', #root
         'PASSWORD': 'Qhsksh4581!', #사용자의 비밀번호
-        'HOST': '', #공백으로 냅두면 default localhost
+        'HOST': '127.0.0.1', #공백으로 냅두면 default localhost
         'PORT': '3306', #공백으로 냅두면 default 3306'
         "OPTIONS": {"charset": "utf8mb4"}
     }
@@ -144,12 +144,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    os.path.join(BASE_DIR,"static"),
 ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

@@ -63,6 +63,7 @@ venv/
 ../.DS_Store
 
 .DS_Store
+.DS_Store?
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
