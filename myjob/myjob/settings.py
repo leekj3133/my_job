@@ -38,7 +38,7 @@ MY_SECRET = {
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','myjob.eba-fnfjexi3.ap-northeast-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['127.0.0.1','thisismyjob.eba-hqqe9e6u.ap-northeast-2.elasticbeanstalk.com',"*"]
 APPEND_SLASH=False
 
 
